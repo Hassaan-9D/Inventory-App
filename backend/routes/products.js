@@ -24,7 +24,7 @@ router.get('/:id?', (req, res) => {
     if(id)
         query = `SELECT amount,unit FROM product_variations where product_id = ${id}`;
     else
-        query = `SELECT distinct name FROM products`;
+        query = `SELECT id,name FROM products`;
     con.query(query, function (err, productList, fields){
         if (err) throw err;
         res.send(productList);

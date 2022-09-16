@@ -18,7 +18,7 @@ con.connect(function(err) {
 });
 
  router.get('/', (req, res) => {
-     con.query("SELECT * FROM merchants", function (err, merchantsList){
+     con.query("SELECT id, name, location, phone FROM merchants", function (err, merchantsList){
          if (err) throw err;
          res.send(merchantsList);
          console.log('merchantsList here');

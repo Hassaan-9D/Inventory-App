@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-
+import cors from 'cors';
 import productsRoutes from './routes/products.js'
 import merchantsRoutes from './routes/merchants.js'
 
@@ -11,7 +11,9 @@ const PORT = 5000;
 
 app.use(bodyParser.json());
 
-
+app.use(cors({
+    origin: '*'
+}));
 
 
 app.get("/", (req, res) => {
