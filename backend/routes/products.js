@@ -14,7 +14,6 @@ var con = mysql.createConnection({
   
   con.connect(function(err) {
     if (err) throw err;
-    console.log("Connected!");
   });
 
 
@@ -28,8 +27,6 @@ router.get('/:id?', (req, res) => {
     con.query(query, function (err, productList, fields){
         if (err) throw err;
         res.send(productList);
-        console.log('Variations here');
-        console.log(productList);
         });
 
 });

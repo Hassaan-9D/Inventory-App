@@ -18,9 +18,9 @@ con.connect(function(err) {
 });
 
  router.get('/', (req, res) => {
-     con.query("SELECT id, name, location, phone FROM merchants", function (err, merchantsList){
+     con.query("SELECT id, product, variation,price ,purchase_date FROM purchase_history", function (err, purchaseHistory){
          if (err) throw err;
-         res.send(merchantsList);
+         res.send(purchaseHistory);
          });
 });
 
