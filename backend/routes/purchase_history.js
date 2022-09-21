@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   console.log(req.params.id)
-  con.query(`SELECT product, variation, price FROM purchase_history WHERE purchase_date =` + req.params.id, function (err, purchaseHistory){
+  con.query(`SELECT product, variation, price FROM purchase_history WHERE purchase_date = '${req.params.id}' ` , function (err, purchaseHistory){
       if (err) throw err;
       console.log('AA GAI REQ BHAIIIIIII');
       console.log(purchaseHistory);    
