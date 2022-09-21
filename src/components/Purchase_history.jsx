@@ -42,8 +42,10 @@ const handleProducts=(event)=>{
 
 useEffect( ()=>{
   const getDay = async()=> {
-    
-      const req= await fetch(`http://localhost:5000/history/`+ date);
+      console.log("DATE")
+      console.log(date)
+      const req= await fetch(`http://localhost:5000/history/`+ String(date));
+      console.log(`http://localhost:5000/history/`+ String(date))
       const getres= await req.json();
       
       setDay(await getres);
