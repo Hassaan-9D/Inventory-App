@@ -1,49 +1,126 @@
 import Table from 'react-bootstrap/Table';
+import { useState, useEffect } from 'react';
 
-function purchaseHistory() {
-  return (
-    <Table >
+
+export default function PurchaseHistory() {
+
+  // const [history, setHistory] = useState([]);
+  const [sumTable, setSumTable] = useState([]);
+  const [date, setDate] = useState(' ');
+  const [day, setDay] =  useState([]);
+
+
+//   useEffect( ()=>{
+//     const getHistory = async()=> {
+//       const req= await fetch("http://localhost:5000/history");
+//       const getres= await req.json();
+//       console.log(req);
+//       setHistory(await getres);
+//   }
+//   getHistory();
+// },[]);
+
+
+useEffect( ()=>{
+
+  const getSumTable = async ()=>{
+  const resSumTable= await fetch(`http://localhost:5000/sum`);
+  const getst= resSumTable.json();
+  setSumTable(await getst);
+
+  }
+  getSumTable();
+},[]);
+
+const handleProducts=(event)=>{
+  
+  const getDate = event;
+  setDate(getDate);
+  console.log(date);
+  
+}
+
+useEffect( ()=>{
+  const getDay = async()=> {
+      console.log("DATE")
+      console.log(date)
+      const req= await fetch(`http://localhost:5000/history/`+ String(date));
+      console.log(`http://localhost:5000/history/`+ String(date))
+      const getres= await req.json();
+      
+      setDay(await getres);
+    
+  
+}
+getDay();
+},[date]);
+ 
+
+
+  return (<>
+  <Table >
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>TOTAL AMOUNT</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      {
+      sumTable.map( (table) =>(
+      <tr >
+          <td>{table.DATE}</td>
+          <td>{table.Total}</td>
+          <button type="button" class="btn btn-outline-info  btn-sm" onClick = {() =>handleProducts(table.DATE)}>SEE MORE</button>
+      </tr>
+        ))}
+  </tbody>
+  </Table>
+
+  <Table >
       <thead>
         <tr>
-          <th>product</th>
-          <th>variation</th>
-          <th>seller</th>
-          <th>company </th>
+          <th>Product</th>
+          <th>Variation</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+          {
+          day.map( (day) =>(
+          <tr>
+              <td>{day.product}</td>
+              <td>{day.variation}</td>
+              <td>{day.price}</td>
+          </tr>
+            ))}
+      </tbody>
+  </Table>
+  {/* <Table >
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Product</th>
+          <th>Variation</th>
           <th>Price</th>
           <th>date</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>can</td>
-          <td>250ml</td>
-          <td>irfan</td>
-          <td>pepsi</td>
-          <td>50RS</td>
-          <td>2/2/2022</td>
-        </tr>
-
-        <tr>
-          <td>can</td>
-          <td>250ml</td>
-          <td>irfan</td>
-          <td>pepsi</td>
-          <td>50RS</td>
-          <td>2/2/2022</td>
-        </tr>
-
-        <tr>
-        <td>can</td>
-          <td>250ml</td>
-          <td>irfan</td>
-          <td>pepsi</td>
-          <td>50RS</td>
-          <td>2/2/2022</td>
-         
-        </tr>
+          {
+          history.map( (history) =>(
+          <tr>
+              <td>{history.id}</td>
+              <td>{history.product}</td>
+              <td>{history.variation}</td>
+              <td>{history.price}</td>
+              <td>{history.purchase_date}</td>
+          </tr>
+            ))}
       </tbody>
-    </Table>
+  </Table> */}
+
+</>
   );
 }
-
-export default purchaseHistory;

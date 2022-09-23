@@ -25,8 +25,12 @@ function Naavbar() {
                 <Link to="/merchants" style={{ textDecoration: 'none', color:'black' }}> Merchants</Link>
                 </Nav.Link>
                 <Nav.Link >
+                <Link to="/add" style={{ textDecoration: 'none', color:'black' }}> Add Product</Link>
+                </Nav.Link>
+                <Nav.Link >
                 <Link to="/settings" style={{ textDecoration: 'none', color:'black' }}> Settings</Link>
                 </Nav.Link>
+               
             </Nav>
             </Container>
         </Navbar>

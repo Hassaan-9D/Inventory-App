@@ -37,10 +37,8 @@ export default function MerchantsList() {
               <td>{merchant.phone}</td>
           </tr>
             ))}
-        
-       
-       
       </tbody>
+      
     </Table>
   );
 }
