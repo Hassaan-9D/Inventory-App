@@ -17,11 +17,22 @@ con.connect(function(err) {
   
 });
 
- router.get('/', (req, res) => {
-     con.query("SELECT id, product, variation,price ,purchase_date FROM purchase_history", function (err, purchaseHistory){
-         if (err) throw err;
-         res.send(purchaseHistory);
-         });
+// router.get('/', (req, res) => {
+//      con.query("SELECT id, product, variation,price ,DATE_FORMAT(purchase_date, '%Y-%m-%d') as DATE FROM purchase_history", function (err, purchaseHistory){
+//          if (err) throw err;
+//          res.send(purchaseHistory);
+//          });
+// });
+
+
+
+router.get('/:id', (req, res) => {
+  console.log(req.params.id)
+  con.query(`SELECT product, variation, price FROM purchase_history WHERE purchase_date = '${req.params.id}' ` , function (err, purchaseHistory){
+      if (err) throw err;
+      res.send(purchaseHistory);
+      });
+    
 });
 
 
